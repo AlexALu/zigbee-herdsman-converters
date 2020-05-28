@@ -8374,6 +8374,19 @@ const devices = [
             // Configure reporing of currentPositionLiftPercentage always fails.
             // https://github.com/Koenkk/zigbee2mqtt/issues/3216
         },
+    {
+        zigbeeModel: ['mcdj3aq'],
+        model: 'ZM-25TQ',
+        vendor: 'Zemismart',
+        description: 'Curtain/roller blind tubular motor',
+        supports: 'open, close, stop',
+        fromZigbee: [fz.ignore_basic_report],
+        toZigbee: [tz.cover_state, tz.cover_position_tilt],
+        meta: {configureKey: 1, multiEndpoint: true},
+        configure: async (device, coordinatorEndpoint) => {
+            const endpoint = device.getEndpoint(1);
+            await bind(endpoint, coordinatorEndpoint, ['closuresWindowCovering']);
+            // Configure reporing of currentPositionLiftPercentage always fails.
     },
     {
         zigbeeModel: ['TS0003'],
